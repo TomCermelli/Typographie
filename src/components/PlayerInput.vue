@@ -1,6 +1,6 @@
 <template>
   <div>
-    <input id="playerinput" type="text" v-model="playerinput" v-on:keyup="checkWord" />
+    <input id="playerText" type="text" v-model="playerText" v-on:keyup="checkWord" />
     <h3>{{score}}</h3>
   </div>
 </template>
@@ -10,23 +10,33 @@ export default {
   name: "PlayerInput",
   data() {
     return {
-      playerinput: "",
-      score: 0
+      playerText: "",
+      score: 0,
+      i: 0
     };
   },
   props: {
-    word: String
+    newWord: String
+
   },
   methods: {
     checkWord: function() {
-      if (this.playerinput == this.word) {
-        this.$emit("updateWord");
-        this.playerinput = "";
+      if (this.playerText == this.newWord) {
+        this.$emit("findNewWord");
+        this.playerText = ""; 
         this.score += 1;
+        this.i = 0;
+        return;
+      }
+      if (this.playerText[this.i] !== this.newWord[this.i]){
+        this.playerText = "";
+        this.i = 0;
+        return;
+      }
+      this.i++;
       }
     }
-  }
-};
+  };
 </script>
 
 <style>

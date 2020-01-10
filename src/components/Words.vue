@@ -1,7 +1,7 @@
 <template>
   <div class="words">
     <h3>{{word}}</h3>
-    <PlayerInput v-bind:word="word" @updateWord="updateWord" />
+    <PlayerInput v-bind:newWord="word" @findNewWord="updateWord" />
   </div>
 </template>
 
